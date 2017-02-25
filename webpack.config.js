@@ -14,7 +14,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].js'
+    filename: '[name].[chunkhash].js'
   },
   module: {
     rules: [
@@ -32,7 +32,8 @@ module.exports = {
   plugins: [
     // look at the sum of dependencies and stash them into vendor bundle
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
+      // avoid clearing cached vendor bundle
+      names: ['vendor','manifest']
     }),
     // generate dist html based on our template
     new HtmlWebpackPlugin({
