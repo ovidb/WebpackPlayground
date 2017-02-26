@@ -38,6 +38,12 @@ module.exports = {
     // generate dist html based on our template
     new HtmlWebpackPlugin({
       template: 'src/index.html'
+    }),
+    // make sure react doesn't take all the error checking in the consideration
+    // while in production
+    // use defineplugin to define variables on the window scope variable
+    new webpack.DefinePlugin({
+      'proces.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     })
   ]
 };
